@@ -1,9 +1,9 @@
 <h1>Rides</h1>
 <ul>
   <% @trips.each do |trip| %>
-  <li> class="trips"
+  <li class="trips">
     <span>
-      <%= link_to trip.id, trip_path(trip.id) %>
+      <%= link_to trip.date, trip_path(trip.id), class: 'date-link' %>
     </span>
   </li>
   <% end %>
