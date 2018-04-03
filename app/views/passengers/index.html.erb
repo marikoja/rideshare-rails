@@ -1,2 +1,16 @@
 <h1>Passengers#index</h1>
-<p>Find me in app/views/passengers/index.html.erb</p>
+
+<ul>
+  <% @passengers.each do |passenger| %>
+  <li class="passengers">
+    <span>
+      <%= link_to passenger.name, passenger_path(passenger.id), class: 'name-link' %>
+    </span>
+  </li>
+  <li class="passengers">
+    <span>
+      <%= link_to passenger.phone_num, passenger_path(passenger.id), class: 'phone_num-link' %>
+    </span>
+  </li>
+  <% end %>
+</ul>
