@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+
   resources :trips
-  # root 'trips#index' #defines homepage
+
+  resources :passengers
+  root 'trips#index' #defines homepage
 end
