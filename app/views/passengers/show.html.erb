@@ -32,7 +32,7 @@
 
 <ul>
    <li>
-     <%= link_to "Request ride", new_trip_passenger_path(:passenger=>@passenger.id),  method: :post, data: {confirm: "Do u need a ride?"} %>
+     <%= link_to "Request ride", new_passenger_trip_path(params[:id]),  method: :get, data: {confirm: "Do u need a ride?"} %>
      <%= link_to "Edit", edit_passenger_path %>
    </li>
    <li>
