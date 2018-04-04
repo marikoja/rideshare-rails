@@ -1,2 +1,22 @@
-<h1>Drivers#show</h1>
-<p>Find me in app/views/drivers/show.html.erb</p>
+<h1><%= @driver.name %></h1>
+
+<img src="http://placebeyonce.com/250-150" alt="Driver profile picture">
+
+<p>
+  <%= "Average Rating: #{}"%>
+</p>
+
+<p>
+  <%= "Total Earnings: #{}"%>
+</p>
+
+<h3>Driver Trips</h3>
+
+  <ul>
+      <li>
+        <%= link_to "Edit", edit_driver_path %>
+      </li>
+      <li>
+        <%= link_to "Delete", trip_path(@driver.id), method: :delete %>
+      </li>
+</ul>

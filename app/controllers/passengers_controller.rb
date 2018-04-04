@@ -46,7 +46,7 @@ class PassengersController < ApplicationController
     end
     redirect_to passengers_path
   end
-  end
+
   private
     def passenger_params
       return params.require(:passenger).permit(:passenger_id)
