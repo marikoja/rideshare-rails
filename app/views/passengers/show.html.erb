@@ -2,6 +2,8 @@
 
 <h3>phone_num:<%= @passenger.phone_num %></h2>
 
+  </h3>
+
 <h2>Passengers Trips:</h2>
 <table>
   <tr>
@@ -30,10 +32,10 @@
 
 <ul>
    <li>
-     <%= link_to "Request ride", new_trip_path,  method: :post, data: {confirm: "Do u need a ride?"}%>%>
+     <%= link_to "Request ride", new_trip_passenger_path(:passenger=>@passenger.id),  method: :post, data: {confirm: "Do u need a ride?"} %>
      <%= link_to "Edit", edit_passenger_path %>
    </li>
    <li>
-     <%= link_to "Delete", passenger_path(@passenger.id), method: :delete%>
+     <%= link_to "Delete", passenger_path(@passenger.id), method: :delete %>
    </li>
  </ul>

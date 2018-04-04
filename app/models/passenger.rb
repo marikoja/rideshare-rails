@@ -3,15 +3,14 @@ class Passenger < ApplicationRecord
   validates :name, presence: true
   validates :phone, presence: true
 
-  def total_cost
-    #if loop for new riders with no trips, think about proper exception handling instead of returning nil
-    if @trips.count > 0
-      total = @trips.map {|trip| trip.cost}.reduce(:+) / 100.0
-      return '%.02f' % total
-    else
-      return nil
-    end
-  end
+  # def total_cost
+  #   count = 0
+  #   #if loop for new riders with no trips, think about proper exception handling instead of returning nil
+  #
+  #     total = @trips.map {|trip| trip.cost}.reduce(:+) / 100.0
+  #     return '%.02f' % total
+  #
+  # end
 
 
   # def start_trip
