@@ -1,24 +1,28 @@
 class Driver < ApplicationRecord
   has_many :trips
 
-  def self.driver_rating
+  def driver_rating
     total_ratings = 0
     number_of_trips = 0
 
-    Driver.trips.all.each do |trip|
-      total_ratings += trip.rating
-      number_of_trips += 1
+    self.trips.each do |trip|
+      if trip.rating != nil
+        total_ratings += trip.rating
+        number_of_trips += 1
+      end
     end
 
     average_rating = (number_of_trips == 0 ? 0 : total_ratings/number_of_trips)
     return average_rating
   end
 
-  def self.driver_earnings
+  def driver_earnings
     total_earnings = 0
 
-    Driver.trips.all.each do |trip|
-      total_earnings += trip.cost
+    self.trips.each do |trip|
+      if trip.rating != nil
+        total_earnings += trip.cost
+      end
     end
 
     total_earnings = total_earnings/100
