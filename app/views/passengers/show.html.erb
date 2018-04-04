@@ -1,2 +1,39 @@
-<h1>Passengers#show</h1>
-<p>Find me in app/views/passengers/show.html.erb</p>
+<h2>Name:<%= @passenger.name %></h2>
+
+<h3>phone_num:<%= @passenger.phone_num %></h2>
+
+<h2>Passengers Trips:</h2>
+<table>
+  <tr>
+    <th>ID</th>
+      <th>Drivers</th>
+      <th>Passenger</th>
+      <th>Date</th>
+      <th>Rating</th>
+      <th>Cost</th>
+    </tr>
+
+    <% @passenger.trips.all.each do |trip| %>
+
+    <tr>
+    <td><%=trip.id%></td>
+    <td><%=trip.driver_id%></td>
+    <td><%= trip.passenger_id %></td>
+    <td><%= trip.date %></td>
+    <td><%= trip.rating %></td>
+    <td><%=trip.cost%></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+<ul>
+   <li>
+     <%= link_to "Request ride" %>
+     <%= link_to "Edit", edit_passenger_path %>
+   </li>
+   <li>
+     <%= link_to "Delete", passenger_path(@passenger.id), method: :delete%>
+   </li>
+ </ul>
