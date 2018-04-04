@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
 
 
-  resources :trips do
-    resources :passengers
+  resources :passengers do
+    resources :trips, only:[:index,:new,:create]
   end
 
-
+  resources :trips
   resources :passengers
 
 
