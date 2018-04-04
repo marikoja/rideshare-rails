@@ -1,2 +1,46 @@
-<h1>Drivers#show</h1>
-<p>Find me in app/views/drivers/show.html.erb</p>
+<h1><%= @driver.name %></h1>
+
+<img src="http://placebeyonce.com/250-150" alt="Driver profile picture">
+
+<% total_ratings = 0%>
+<% number_of_trips = 0%>
+<% total_earnings = 0%>
+
+<% @driver.trips.all.each do |trip| %>
+  <% total_ratings += trip.rating %>
+  <% number_of_trips += 1 %>
+  <% total_earnings += trip.cost %>
+<% end %>
+
+<p>
+  <%= "Average Rating: #{(number_of_trips == 0 ? 0 : total_ratings/number_of_trips)}"%>
+</p>
+
+<p>
+  <%= "Total Earnings: $#{(total_earnings/100)}"%>
+</p>
+
+<h2>Driver Trips</h2>
+<table>
+  <tr>
+    <th>ID</th>
+      <th>Passenger</th>
+      <th>Date</th>
+      <th>Rating</th>
+      <th>Cost</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+
+    <% @driver.trips.all.each do |trip| %>
+      <tr>
+        <td><%=trip.id%></td>
+        <td><%= trip.passenger_id %></td>
+        <td><%= trip.date %></td>
+        <td><%= trip.rating %></td>
+        <td><%="$#{(trip.cost/100)}"%></td>
+        <td><%= link_to "Edit", edit_driver_path %></td>
+        <td><%= link_to "Delete", trip_path(@driver.id), method: :delete %></td>
+      </tr>
+    <% end %>
+</table>

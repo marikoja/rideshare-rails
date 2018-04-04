@@ -1,14 +1,9 @@
-<h1>Drivers#index</h1>
+<h1>Drivers</h1>
 <ul>
   <% @drivers.each do |driver| %>
   <li class="drivers">
     <span>
       <%= link_to driver.name, driver_path(driver.id), class: 'name-link' %>
-    </span>
-  </li>
-  <li class="drivers">
-    <span>
-      <%= link_to driver.vin, driver_path(driver.id), class: 'vin-link' %>
     </span>
   </li>
   <% end %>
