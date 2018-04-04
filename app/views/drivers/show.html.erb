@@ -2,22 +2,12 @@
 
 <img src="http://placebeyonce.com/250-150" alt="Driver profile picture">
 
-<% total_ratings = 0%>
-<% number_of_trips = 0%>
-<% total_earnings = 0%>
-
-<% @driver.trips.all.each do |trip| %>
-  <% total_ratings += trip.rating %>
-  <% number_of_trips += 1 %>
-  <% total_earnings += trip.cost %>
-<% end %>
-
 <p>
-  <%= "Average Rating: #{(number_of_trips == 0 ? 0 : total_ratings/number_of_trips)}"%>
+  <%= "Average Rating: #{Driver.driver_rating}"%>
 </p>
 
 <p>
-  <%= "Total Earnings: $#{(total_earnings/100)}"%>
+  <%= "Total Earnings: $#{Driver.driver_earnings}"%>
 </p>
 
 <h2>Driver Trips</h2>
