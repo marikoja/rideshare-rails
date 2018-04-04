@@ -10,13 +10,27 @@
   <%= "Total Earnings: #{}"%>
 </p>
 
-<h3>Driver Trips</h3>
+<h2>Driver Trips</h2>
+<table>
+  <tr>
+    <th>ID</th>
+      <th>Passenger</th>
+      <th>Date</th>
+      <th>Rating</th>
+      <th>Cost</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
 
-  <ul>
-      <li>
-        <%= link_to "Edit", edit_driver_path %>
-      </li>
-      <li>
-        <%= link_to "Delete", trip_path(@driver.id), method: :delete %>
-      </li>
-</ul>
+    <% @driver.trips.all.each do |trip| %>
+      <tr>
+        <td><%=trip.id%></td>
+        <td><%= trip.passenger_id %></td>
+        <td><%= trip.date %></td>
+        <td><%= trip.rating %></td>
+        <td><%=trip.cost%></td>
+        <td><%= link_to "Edit", edit_driver_path %></td>
+        <td><%= link_to "Delete", trip_path(@driver.id), method: :delete %></td>
+      </tr>
+    <% end %>
+</table>
