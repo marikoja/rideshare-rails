@@ -3,7 +3,6 @@
 <h3>phone_num:<%= @passenger.phone_num %></h2>
 
 <h2>Passengers Trips:</h2>
-
 <table>
   <tr>
     <th>ID</th>
@@ -13,7 +12,9 @@
       <th>Rating</th>
       <th>Cost</th>
     </tr>
+
     <% @passenger.trips.all.each do |trip| %>
+
     <tr>
     <td><%=trip.id%></td>
     <td><%=trip.driver_id%></td>
