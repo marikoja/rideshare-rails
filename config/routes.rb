@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
 
   resources :drivers
- 
+  
+
   root 'trips#index' #defines homepage
 end

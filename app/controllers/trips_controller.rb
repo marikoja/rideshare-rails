@@ -13,7 +13,8 @@ class TripsController < ApplicationController
   end
 
   def create
-    trip = Trip.new(trip_params)
+    trip = Trip.new(passenger:passenger_id, driver: Driver.ids.sample, cost:rand(100..15000), rating: 0, date: Date.today)
+  
     if trip.save
       redirect_to trips_path
     else
