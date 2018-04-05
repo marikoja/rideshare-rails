@@ -19,24 +19,18 @@
 
       </tr>
     <tr>
-      <td><%= @trip.id %></td>
-     <td><%= Driver.random_driver.name %> </td>
-
-    <% if @trip.passenger_id == nil || @trip.passenger_id == 0 %>
-    <td>Passenger ID does not exist </td>
-    <% else %>
-    <td> <%= link_to @trip.passenger_id, passenger_path(@trip.passenger_id) %></td>
-    <%end %>
-
-    <td><%= @trip.date %></td>
+    <td><%= @trip.id %></td>
+     <td><%= Driver.random_driver.name %></td>
+    <td> <%= @trip.passenger.name %></td>
+    <td><%= Date.today%></td>
     <td><%= @trip.rating %></td>
     <td><%= Driver.cost %></td>
   </tr>
   </table>
 
 
-  <%= link_to "edit", edit_trip_path %></td>
+  <%= link_to "edit", edit_trip_path(params[:passenger_id]) %></td>
   <%= link_to "delete",
-    trip_path(@trip),
+    trip_path(params[:passenger_id]),
     method: :delete,
     data: { confirm: 'Are you sure?' } %></td>
