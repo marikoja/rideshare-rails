@@ -1,5 +1,5 @@
 class Driver < ApplicationRecord
-  has_many :trips
+  has_many :trips, dependent: :destroy
 
     validates :name, presence: true, uniqueness: {message: "Driver already exists"}
     validates :vin, presence: true, uniqueness: {message: "Vin already exists"}
