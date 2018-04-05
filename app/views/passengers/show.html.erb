@@ -24,7 +24,7 @@
     <td><%= trip.rating %></td>
     <td><%=trip.cost%></td>
     <td><%= link_to "Edit" , edit_passenger_path(@passenger.id)%></td>
-    <td><%= link_to "Delete", passenger_path(@passenger.id),method: :delete %></td>
+    <td><%= link_to "Delete", trip_path(trip.id),method: :delete %></td>
     </tr>
     <% end %>
 

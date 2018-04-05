@@ -16,7 +16,7 @@ class PassengersController < ApplicationController
   def create
     @passenger = Passenger.new(passenger_params)
     if @passenger.save
-      redirect_to passegers_path
+      redirect_to passengers_path
     else
       render :new
     end
@@ -43,7 +43,7 @@ class PassengersController < ApplicationController
     id = params[:id]
     @passenger = Passenger.find(id)
     if @passenger
-      @passenger.destroy
+      @passenger.trips.delete_all
     end
     redirect_to passengers_path
   end

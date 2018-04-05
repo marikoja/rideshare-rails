@@ -1,6 +1,9 @@
 class Driver < ApplicationRecord
   has_many :trips
 
+    validates :name, presence: true, uniqueness: {message: "Driver already exists"}
+    validates :vin, presence: true, uniqueness: {message: "Vin already exists"}
+
   def driver_rating
     total_ratings = 0
     number_of_trips = 0
@@ -30,10 +33,10 @@ class Driver < ApplicationRecord
     return total_earnings
   end
 
-  def new_trip_data
+  def self.random_driver
     return Driver.all.sample
-    # cost = rand(5..100)
   end
+
   def self.cost
     cost = rand(10..100)
     return cost

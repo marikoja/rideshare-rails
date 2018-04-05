@@ -19,10 +19,10 @@ class TripsController < ApplicationController
     passenger_id = Passenger.find_by(id: params[:passenger_id])
     driver_id = Driver.random_driver
     cost = rand(10..500)
-    date=Date.today
+    date = Date.today
     rating = 0
     @trip = Trip.new(trip_params)
-    
+
     if @trip.save
       redirect_to trips_path
     else
