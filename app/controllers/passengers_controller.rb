@@ -43,7 +43,7 @@ class PassengersController < ApplicationController
     id = params[:id]
     @passenger = Passenger.find(id)
     if @passenger
-      @passenger.trips.delete_all
+      @passenger.destroy
     end
     redirect_to passengers_path
   end

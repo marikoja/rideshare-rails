@@ -42,7 +42,7 @@ class DriversController < ApplicationController
     id = params[:id]
     @driver = Driver.find(id)
     if @driver
-      @driver.trips.delete_all
+      @driver.delete_all
     end
     redirect_to driver_path
   end
