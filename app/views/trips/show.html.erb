@@ -1,15 +1,42 @@
 
-<h2>Date:<%= @trip.date %></h2>
 
-<h2>Rating:<%= @trip.rating %></h2>
+<h2>Here are the Trip details </h2>
+<!-- <h2>Driver:<%= Driver.random_driver.name%></h2>
+<h2>Cost:<%= Driver.cost %></p>
+    <h2> Date:<%= Date.today %> </h2>
 
-<h2>Cost:<%= @trip.cost %></p>
+    <h2> Rating: <%= @trip.rating %></h2>
+    <h1> Individual trip detail </h1> -->
+    <table>
+      <tr>
+        <th>Trip ID:</th>
+        <th>Driver:</th>
+        <th>Passenger</th>
+        <th>Date:</th>
+        <th>Rating:</th>
+        <th>Cost:</th>
 
-<ul>
-   <li>
-     <%= link_to "Edit", edit_trip_path %>
-   </li>
-   <li>
-     <%= link_to "Delete", trip_path(@trip.id), method: :delete%>
-   </li>
- </u
+
+      </tr>
+    <tr>
+      <td><%= @trip.id %></td>
+     <td><%= Driver.random_driver.name %> </td>
+
+    <% if @trip.passenger_id == nil || @trip.passenger_id == 0 %>
+    <td>Passenger ID does not exist </td>
+    <% else %>
+    <td> <%= link_to @trip.passenger_id, passenger_path(@trip.passenger_id) %></td>
+    <%end %>
+
+    <td><%= @trip.date %></td>
+    <td><%= @trip.rating %></td>
+    <td><%= Driver.cost %></td>
+  </tr>
+  </table>
+
+
+  <%= link_to "edit", edit_trip_path %></td>
+  <%= link_to "delete",
+    trip_path(@trip),
+    method: :delete,
+    data: { confirm: 'Are you sure?' } %></td>
