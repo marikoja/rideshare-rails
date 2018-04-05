@@ -30,8 +30,9 @@ class Driver < ApplicationRecord
     return total_earnings
   end
 
-  def self.random_driver
+  def new_trip_data
     return Driver.all.sample
+    # cost = rand(5..100)
   end
 
 end
