@@ -1,11 +1,8 @@
 <h2>Name:<%= @passenger.name %></h2>
 
-<h2>phone_num:<%= @passenger.phone_num %></h2>
-<h2>total_cost:<%= @passenger.total_cost %></h2>
-
-  </h3>
-
-<h2>Passengers Trips:</h2>
+<h2>Phone_num:<%= @passenger.phone_num %></h2>
+<h2>Total_cost:<%= @passenger.total_cost %></h2>
+<h2>Passengers Trips</h2>
 <table>
   <tr>
     <th>ID</th>
@@ -19,7 +16,6 @@
     </tr>
 
     <% @passenger.trips.all.each do |trip| %>
-    
     <tr>
     <td><%=trip.id%></td>
     <td><%=trip.driver_id%></td>
@@ -27,8 +23,8 @@
     <td><%= trip.date %></td>
     <td><%= trip.rating %></td>
     <td><%=trip.cost%></td>
-    <td><%= link_to "Edit",edit_trip_path(trip.id)%></td>
-    <td><%= link_to "Details",trip_path(trip.id) %></td>
+    <td><%= link_to "Edit" , edit_passenger_path(@passenger.id)%></td>
+    <td><%= link_to "Delete", passenger_path(@passenger.id),method: :delete %></td>
     </tr>
     <% end %>
 
