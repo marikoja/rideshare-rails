@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+ table, td, th {
+    border: 1px solid black;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td {
+  text-align: center;
+}
+th {
+    height: 50px;
+}
+nav {
+  background-color: rgba(215, 190, 217, 0.64);
+  height: 100px;
+  color: rgb(81, 18, 84);
+}
+/* Passenger and Driver index page styles */
+ul {
+  width: 40em;
+}
+li {
+  float: left;
+  width: 13em;
+}
+a {
+  text-decoration: none;
+}
+
+h2{
+  text-align: center;
+}

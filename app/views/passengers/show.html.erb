@@ -1,6 +1,7 @@
 <h2>Name:<%= @passenger.name %></h2>
 
-<h3>phone_num:<%= @passenger.phone_num %></h2>
+<h2>phone_num:<%= @passenger.phone_num %></h2>
+<h2>total_cost:<%= @passenger.total_cost %></h2>
 
   </h3>
 
@@ -8,15 +9,17 @@
 <table>
   <tr>
     <th>ID</th>
-      <th>Drivers</th>
+      <th>Driver</th>
       <th>Passenger</th>
       <th>Date</th>
       <th>Rating</th>
       <th>Cost</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
 
     <% @passenger.trips.all.each do |trip| %>
-
+    
     <tr>
     <td><%=trip.id%></td>
     <td><%=trip.driver_id%></td>
@@ -24,17 +27,22 @@
     <td><%= trip.date %></td>
     <td><%= trip.rating %></td>
     <td><%=trip.cost%></td>
-  </tr>
-  <% end %>
+    <td><%= link_to "Edit",edit_trip_path(trip.id)%></td>
+    <td><%= link_to "Details",trip_path(trip.id) %></td>
+    </tr>
+    <% end %>
+
+
 </table>
 
 
 
 <ul>
    <li>
-     <%= link_to "Request ride", new_passenger_trip_path(params[:id]),  method: :get, data: {confirm: "Do u need a ride?"} %>
-     <%= link_to "Edit", edit_passenger_path %>
-   </li>
+     <%= link_to "Request ride", passenger_trips_path(params[:id]),  method: :post %></li>
+     <li><%= link_to "Edit", edit_passenger_path %></li>
+
+
    <li>
      <%= link_to "Delete", passenger_path(@passenger.id), method: :delete %>
    </li>

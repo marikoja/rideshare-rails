@@ -1,11 +1,12 @@
 class PassengersController < ApplicationController
   def index
-    @passengers = Passenger.all
+    @passengers = Passenger.all.order(:name)
   end
 
   def show
     id = params[:id]
     @passenger = Passenger.find(id)
+    @trips = Trip.where(passenger_id: params[:id])
   end
 
   def new
@@ -13,8 +14,8 @@ class PassengersController < ApplicationController
   end
 
   def create
-    passenger = Passenger.new(name: params[:passenger][:name],phone: params[:passenger][:phone_num])
-    if passenger.save
+    @passenger = Passenger.new(passenger_params)
+    if @passenger.save
       redirect_to passegers_path
     else
       render :new
@@ -51,5 +52,5 @@ end
 
 private
 def passenger_params
-  return params.require(:passenger).permit(:name,:phone_num)
+  return params.require(:passenger).permit(:name, :phone_num)
 end
