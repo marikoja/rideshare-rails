@@ -10,28 +10,27 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    @trip.passenger_id = params[:passenger_id]
   end
 
   def create
-    if params[:passenger_id]
-      # This is the nested route, /author/:author_id/books/new
-      passenger = Passenger.find_by(id: passenger_id)
-      driver = Driver.random_driver
+
+      passenger_id = Passenger.find_by(id: params[:passenger_id])
+      driver_id = Driver.random_driver
       cost = rand(10..500)
+      date=Date.today
       rating = 0
-      @trips = passenger.trip.new
-
-    else
-      # This is the 'regular' route, /books/new
-      # @trips = trip.new
-    end
-
-  trip = Trip.new
-  if trip.save
-    redirect_to trips_path
+      @trip = Trip.new(trip_params)
+  if @trip.save
+    redirect_to passenger_path(@trip.passenger_id)
   else
-    render :new
+    render :show
   end
+end
+
+def show
+  id = params[:id]
+  @trip = Trip.find(id)
 end
 
 def edit
@@ -39,16 +38,17 @@ def edit
 end
 
 def update
-  @trip = Trip.find_by(id:params[:id])
-  if !@trip.nil?
-    if @trip.update(trip_params)
-      redirect_to trip_path(@trip.id)
+  trip_updates = params[:trip]
+    @trip = Trip.find(params[:id])
+
+    @trip.rating = trip_updates[:rating]
+
+    if @trip.save
+      redirect_to trip_path(@trip)
     else
       render :edit
     end
-  else
-    redirect_to trips_path
-  end
+
 end
 
 def destroy
@@ -59,10 +59,9 @@ def destroy
   end
   redirect_to trips_path
 end
+end
 
 private
 def trip_params
-  return params.require(:trip).permit(:trip_id)
-end
-
+  return params.permit(:date,:cost,:passenger_id,:driver_id,:rating)
 end

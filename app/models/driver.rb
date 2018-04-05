@@ -33,5 +33,9 @@ class Driver < ApplicationRecord
   def self.random_driver
     return Driver.all.sample
   end
+  def self.cost
+    cost = rand(10..100)
+    return cost
+  end
 
 end
