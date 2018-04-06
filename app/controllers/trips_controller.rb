@@ -43,7 +43,11 @@ class TripsController < ApplicationController
     @trip.rating = trip_updates[:rating]
 
     if @trip.save
-      redirect_to trip_path(@trip)
+      if @trip.rating > 0
+        redirect_to trip_path(@trip.passenger)
+      else
+        redirect_to trip_path(@trip)
+      end
     else
       render :edit
     end
