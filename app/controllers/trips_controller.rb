@@ -10,8 +10,6 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    # @trip.passenger = Passenger.find(params[:id])
-    # @trip.passenger_id = params[:passenger_id]
   end
 
   def create
@@ -23,7 +21,7 @@ class TripsController < ApplicationController
     @trip.rating = 0
 
     if @trip.save
-      redirect_to trips_path
+      redirect_to passenger_path(@trip.passenger)
     else
       render :edit
     end
