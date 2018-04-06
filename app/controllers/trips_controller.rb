@@ -18,7 +18,7 @@ class TripsController < ApplicationController
     @trip.driver = Driver.random_driver
     @trip.cost = rand(100..10000)
     @trip.date = Date.today
-    @trip.rating = 0
+    # @trip.rating = 0
 
     if @trip.save
       redirect_to passenger_path(@trip.passenger)
