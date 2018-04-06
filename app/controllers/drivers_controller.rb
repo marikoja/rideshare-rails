@@ -3,18 +3,14 @@ class DriversController < ApplicationController
     @drivers = Driver.all
   end
 
-  def show
-    id = params[:id]
-    @driver = Driver.find(id)
-  end
-
   def new
     @driver = Driver.new
   end
 
   def create
-    driver = Driver.new(driver_params)
-    if driver.save
+    @driver = Driver.new(driver_params)
+
+    if @driver.save
       redirect_to drivers_path
     else
       render :new
@@ -22,37 +18,32 @@ class DriversController < ApplicationController
   end
 
   def edit
-    @driver = Driver.find_by(id: params[:id])
+    @driver = Driver.find(params[:id])
   end
 
   def update
-    @driver = Trip.find_by(id: params[:id])
-    if !@driver.nil?
-      if @driver.update(driver_params)
+    @driver = Driver.find(params[:id])
+    result = @driver.update(driver_params)
+      if result
         redirect_to driver_path(@driver.id)
       else
         render :edit
       end
-    else
-      redirect_to trips_path
-    end
+  end
+
+  def show
+    @driver = Driver.find(params[:id])
   end
 
   def destroy
-    id = params[:id]
-    @driver = Driver.find(id)
-    if @driver
-      @driver.destroy
-    end
+    driver = Driver.find(params[:id])
+    driver.destroy
+
     redirect_to drivers_path
   end
 
-private
-
+  private
   def driver_params
-    return params.require(:driver).permit(:driver_id)
-
+    return params.require(:driver).permit(:name, :vin)
   end
-
-
 end

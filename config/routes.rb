@@ -1,18 +1,16 @@
-Rails.application.routes.draw do
 
+  Rails.application.routes.draw do
+    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+    get '/', to: 'main#index', as: 'root'
 
-  resources :passengers do
-    resources :trips, only:[:index,:new,:create,:show,:edit]
+    resources :drivers 
+
+    resources :passengers do
+
+      post '/new_trip', to: 'trips#create'
+    end
+
+    resources :trips, :except => [:index]
+    # get '/', to: 'main#index'
   end
-
-
-  resources :trips
-  resources :passengers
-
-
-  resources :drivers
-
-
-  root 'trips#index' #defines homepage
-end

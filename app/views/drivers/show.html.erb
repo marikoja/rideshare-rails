@@ -1,36 +1,32 @@
-<h1><%= @driver.name %></h1>
+<h2>Driver Details</h2>
 
-<img src="http://placebeyonce.com/250-150" alt="Driver profile picture">
+<div>
+  <strong><%= @driver.name %></strong>
+  <p><%= @driver.vin %></p>
+</div>
 
-<p>
-  <%= "Average Rating: #{@driver.driver_rating}"%>
-</p>
+<div>
+  <%= @driver.total_earnings %>
+</div>
 
-<p>
-  <%= "Total Earnings: $#{@driver.driver_earnings}"%>
-</p>
+<div>
+  <%= @driver.avg_rating %>
+</div>
 
-<h2>Driver Trips</h2>
-<table>
-  <tr>
-    <th>ID</th>
-      <th>Passenger</th>
-      <th>Date</th>
-      <th>Rating</th>
-      <th>Cost</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
+<div>
+  <%= button_to "Edit", edit_driver_path(@driver.id), method: :get %>
+  <%= button_to "Delete", driver_path(@driver.id), method: :delete %>
+</div>
 
-    <% @driver.trips.all.each do |trip| %>
-      <tr>
-        <td><%=trip.id%></td>
-        <td><%= trip.passenger_id %></td>
-        <td><%= trip.date %></td>
-        <td><%= trip.rating %></td>
-        <td><%="$#{(trip.cost/100)}"%></td>
-        <td><%= link_to "Edit", edit_driver_path %></td>
-        <td><%= link_to "Delete", trip_path(@driver.id), method: :delete %></td>
-      </tr>
+<div>
+  <ul>
+    <% @driver.trips.each do |trip| %>
+      <li>
+        <%= link_to "Trip #{trip.id}", trip_path(trip.id) %>
+        <%= trip.date %>
+        <%= trip.rating %>
+        <%= trip.cost %>
+      </li>
     <% end %>
-</table>
+  </ul>
+</div>
