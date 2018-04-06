@@ -10,23 +10,22 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    @trip.passenger = Passenger.find(params[:id])
-    @trip.passenger_id = params[:passenger_id]
+    # @trip.passenger = Passenger.find(params[:id])
+    # @trip.passenger_id = params[:passenger_id]
   end
 
   def create
-
-    passenger_id = Passenger.find_by(id: params[:passenger_id])
-    driver_id = Driver.random_driver
-    cost = rand(10..500)
-    date = Date.today
-    rating = 0
-    @trip = Trip.new(trip_params)
+    @trip = Trip.new
+    @trip.passenger = Passenger.find_by(id: params[:passenger_id])
+    @trip.driver = Driver.random_driver
+    @trip.cost = rand(100..10000)
+    @trip.date = Date.today
+    @trip.rating = 0
 
     if @trip.save
       redirect_to trips_path
     else
-      render :show
+      render :edit
     end
   end
 
@@ -65,5 +64,5 @@ end
 
 private
 def trip_params
-  return params.permit(:date,:cost,:passenger_id,:driver_id,:rating)
+  return params.require(:trip).permit(:date, :cost, :passenger_id, :driver_id, :rating)
 end
