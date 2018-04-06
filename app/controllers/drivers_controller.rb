@@ -13,8 +13,8 @@ class DriversController < ApplicationController
   end
 
   def create
-    driver = Driver.new(driver_params)
-    if driver.save
+    @driver = Driver.new(driver_params)
+    if @driver.save
       redirect_to drivers_path
     else
       render :new
@@ -26,7 +26,7 @@ class DriversController < ApplicationController
   end
 
   def update
-    @driver = Trip.find_by(id: params[:id])
+    @driver = Driver.find_by(id: params[:id])
     if !@driver.nil?
       if @driver.update(driver_params)
         redirect_to driver_path(@driver.id)
@@ -34,7 +34,7 @@ class DriversController < ApplicationController
         render :edit
       end
     else
-      redirect_to trips_path
+      redirect_to drivers_path
     end
   end
 
@@ -50,7 +50,7 @@ class DriversController < ApplicationController
 private
 
   def driver_params
-    return params.require(:driver).permit(:driver_id)
+    return params.require(:driver).permit(:driver_id, :name, :vin)
 
   end
 

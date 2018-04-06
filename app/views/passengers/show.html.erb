@@ -1,7 +1,7 @@
 <h2>Name:<%= @passenger.name %></h2>
 
 <h2>Phone_num:<%= @passenger.phone_num %></h2>
-<h2>Total_cost:<%= @passenger.total_cost %></h2>
+<h2>Total_cost:<%= '%.02f' % (@passenger.total_cost / 100) %></h2>
 <h2>Passengers Trips</h2>
 <table>
   <tr>
@@ -21,10 +21,19 @@
     <td><%=trip.driver_id%></td>
     <td><%= trip.passenger_id %></td>
     <td><%= trip.date %></td>
-    <td><%= trip.rating %></td>
-    <td><%=trip.cost%></td>
-    <td><%= link_to "Edit" , edit_passenger_path(@passenger.id)%></td>
-    <td><%= link_to "Delete", passenger_path(@passenger.id),method: :delete %></td>
+    <td>
+      <% if trip.rating == nil || trip.rating == 0 %>
+        <%= form_for trip do |f|%>
+        <%= f.number_field :rating, min: 1, max: 5%>
+        <%= f.submit %>
+        <% end %>
+      <% else %>
+        <%= trip.rating %>
+      <% end %>
+    </td>
+    <td><%='%.02f' % (trip.cost / 100)%></td>
+    <td><%= link_to "Edit Trip" , edit_trip_path%></td>
+    <td><%= link_to "Delete Trip", trip_path(trip.id),method: :delete %></td>
     </tr>
     <% end %>
 
@@ -34,8 +43,7 @@
 
 
 <ul>
-   <li>
-     <%= link_to "Request ride", passenger_trips_path(params[:id]),  method: :post %></li>
+   <li><%= link_to "Request ride", passenger_trips_path(params[:id]),  method: :post %></li>
      <li><%= link_to "Edit", edit_passenger_path %></li>
 
 

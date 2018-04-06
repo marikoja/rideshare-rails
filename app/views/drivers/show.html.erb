@@ -10,6 +10,9 @@
   <%= "Total Earnings: $#{@driver.driver_earnings}"%>
 </p>
 
+<p><%= link_to "Edit Driver", edit_driver_path %></p>
+<p><%= link_to "Delete Driver", driver_path(@driver.id), method: :delete %> </p>
+
 <h2>Driver Trips</h2>
 <table>
   <tr>
@@ -28,9 +31,9 @@
         <td><%= trip.passenger_id %></td>
         <td><%= trip.date %></td>
         <td><%= trip.rating %></td>
-        <td><%="$#{(trip.cost/100)}"%></td>
-        <td><%= link_to "Edit", edit_driver_path %></td>
-        <td><%= link_to "Delete", trip_path(@driver.id), method: :delete %></td>
+        <td><%="$#{'%.02f' % (trip.cost / 100)}"%></td>
+        <td><%= link_to "Edit Trip", edit_trip_path %></td>
+        <td><%= link_to "Delete Trip", trip_path(trip.id), method: :delete %></td>
       </tr>
     <% end %>
 </table>

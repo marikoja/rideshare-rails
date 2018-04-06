@@ -10,29 +10,26 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    @trip.passenger = Passenger.find(params[:id])
-    @trip.passenger_id = params[:passenger_id]
   end
 
   def create
+    @trip = Trip.new
+    @trip.passenger = Passenger.find_by(id: params[:passenger_id])
+    @trip.driver = Driver.random_driver
+    @trip.cost = rand(100..10000)
+    @trip.date = Date.today
+    # @trip.rating = 0
 
-    passenger_id = Passenger.find_by(id: params[:passenger_id])
-    driver_id = Driver.random_driver
-    cost = rand(10..500)
-    date=Date.today
-    rating = 0
-    @trip = Trip.new(trip_params)
-    
     if @trip.save
-      redirect_to trips_path
+      redirect_to passenger_path(@trip.passenger)
     else
-      render :show
+      render :edit
     end
   end
 
   def show
-    id = params[:id]
-    @trip = Trip.find(id)
+
+    @trip = Trip.find_by(id: params[:id])
   end
 
   def edit
@@ -46,11 +43,15 @@ class TripsController < ApplicationController
     @trip.rating = trip_updates[:rating]
 
     if @trip.save
-      redirect_to trip_path(@trip)
+      if @trip.rating > 0
+        redirect_to passenger_path(@trip.passenger)
+      else
+        redirect_to trip_path(@trip)
+      end
     else
       render :edit
     end
-
+  
   end
 
   def destroy
@@ -65,5 +66,5 @@ end
 
 private
 def trip_params
-  return params.permit(:date,:cost,:passenger_id,:driver_id,:rating)
+  return params.require(:trip).permit(:date, :cost, :passenger_id, :driver_id, :rating)
 end

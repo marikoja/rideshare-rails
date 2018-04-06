@@ -1,4 +1,4 @@
-class PassengersController < ApplicationController
+mclass PassengersController < ApplicationController
   def index
     @passengers = Passenger.all.order(:name)
   end
@@ -16,7 +16,7 @@ class PassengersController < ApplicationController
   def create
     @passenger = Passenger.new(passenger_params)
     if @passenger.save
-      redirect_to passegers_path
+      redirect_to passenger_path(@passenger)
     else
       render :new
     end
