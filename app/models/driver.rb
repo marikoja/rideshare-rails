@@ -1,45 +1,39 @@
 class Driver < ApplicationRecord
-  has_many :trips, dependent: :destroy
 
-    validates :name, presence: true, uniqueness: {message: "Driver already exists"}
-    validates :vin, presence: true, uniqueness: {message: "Vin already exists"}
+  has_many :trips, -> { order(date: :desc) }, dependent: :destroy
 
-  def driver_rating
-    total_ratings = 0
-    number_of_trips = 0
+    validates :name, uniqueness: {message: "Driver already exists"}
+    validates :vin,  uniqueness: {message: "Vin already exists"}
 
-    self.trips.each do |trip|
-      if trip.rating != nil
-        total_ratings += trip.rating
-        number_of_trips += 1
-      end
+
+  validates :name, presence: { message: "You need to provide a name" }
+  validates :vin, presence: { message: "You need to provide a VIN number" }
+
+# Calculate total earnings for driver less 15%
+  def total_earnings
+    total = 0
+    trips.each do |trip|
+      total += trip.cost
+    end
+    total_earning = total * (1 - 0.15)
+    return "$ #{(total_earning/100).round(2)}"
+  end
+
+# Calculate average rating for driver
+  def avg_rating
+    total_rating = 0
+    counter = 0
+    trips.each do |trip|
+      total_rating += trip.rating
+      counter += 1
     end
 
-    average_rating = (number_of_trips == 0 ? 0 : total_ratings/number_of_trips)
-    return average_rating
-  end
-
-  def driver_earnings
-    total_earnings = 0
-
-    self.trips.each do |trip|
-      if trip.rating != nil
-        total_earnings += trip.cost
-      end
+    if counter == 0
+      return "No available average rating"
+    else
+      return (total_rating / counter)
     end
-
-    total_earnings = total_earnings/100
-
-    return total_earnings
   end
 
-  def self.random_driver
-    return Driver.all.sample
-  end
-
-  # def self.cost
-  #   cost = rand(100..10000)
-  #   return cost
-  # end
 
 end

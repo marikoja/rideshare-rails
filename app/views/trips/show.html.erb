@@ -1,24 +1,24 @@
+<h2>Your Trip Details</h2>
 
 
-<h2>Here are the Trip details </h2>
-
-    <table>
-      <tr>
-        <th>Trip ID:</th>
-        <th>Driver:</th>
-        <th>Passenger</th>
-        <th>Date:</th>
-        <th>Rating:</th>
-        <th>Cost:</th>
-
-
-      </tr>
-    <tr>
-    <td><%= @trip.id %></td>
-     <td><%= Driver.random_driver.name %></td>
-    <td> <%= @trip.passenger.name %></td>
-    <td><%= Date.today%></td>
-    <td><%= @trip.rating %></td>
-    <td><%= @trip.cost %></td>
+<table>
+  <tr>
+    <th>Passenger Name</th>
+    <th>Driver Name</th>
+    <th>Cost of Trip</th>
+    <th>Trip Rating</th>
   </tr>
-  </table>
+  <tr>
+    <td><%= @trip.passenger.name %></td>
+    <td><%= @trip.driver.name %></td>
+    <td><%= "$#{@trip.cost/100.round(2)}" %></td>
+    <td><%= "#{@trip.rating}" %></td>
+  </tr>
+</table>
+
+    <%= link_to "Edit rating", edit_trip_path %>
+    <%= button_to "Delete", trip_path(@trip.id), method: :delete %>
+
+
+
+   

@@ -1,5 +1,12 @@
 class Trip < ApplicationRecord
-  belongs_to :passenger
   belongs_to :driver
-  validates :rating, numericality: { only_integer: true, allow_nil: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0, message: "Rating must be a number between 0-5." }
+  belongs_to :passenger
+
+  validates :date, presence: { message: "You need to provide a date" }
+  validates :rating, presence: { message: "You need to provide a rating" }
+  validates :cost, presence: { message: "You need to provide a cost" }
+
+  def cost_in_dollars
+    return (self.cost / 100.0).round(2)
+  end
 end

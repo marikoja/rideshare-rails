@@ -1,70 +1,66 @@
 class TripsController < ApplicationController
   def index
-    @trips = Trip.all
+    if params[:driver_id]
+      @trips = Driver.find(params[:driver_id]).trips.order(date: :desc)
+    else
+      @trips = Trip.all.order(date: :desc)
+    end
   end
 
   def show
-    id = params[:id]
-    @trip = Trip.find(id)
+    @trip = Trip.find_by(id: params[:id])
   end
 
   def new
-    @trip = Trip.new
+
+    @trip = Trip.new(passenger_id: params[:passenger][:passenger_id])
   end
 
   def create
-    @trip = Trip.new
-    @trip.passenger = Passenger.find_by(id: params[:passenger_id])
-    @trip.driver = Driver.random_driver
-    @trip.cost = rand(100..10000)
-    @trip.date = Date.today
-    # @trip.rating = 0
-
+    
+    @trip = Trip.new(
+      driver_id: Driver.order("RANDOM()").first.id,
+      passenger_id: params[:passenger_id],
+      rating: 0,
+      cost: rand(1000..10000),
+      date: Date.today
+    )
     if @trip.save
-      redirect_to passenger_path(@trip.passenger)
+      redirect_to passengers_path
+      # redirect_to "/passengers/#{params[:passenger_id]}"
     else
-      render :edit
+      render :new
     end
   end
+   
 
-  def show
-
-    @trip = Trip.find_by(id: params[:id])
-  end
-
+ 
   def edit
-    @trip = Trip.find_by(id: params[:id])
+    @trip = Trip.find(params[:id])
   end
 
   def update
-    trip_updates = params[:trip]
     @trip = Trip.find(params[:id])
-
-    @trip.rating = trip_updates[:rating]
-
-    if @trip.save
-      if @trip.rating > 0
-        redirect_to passenger_path(@trip.passenger)
+    result = @trip.update({rating: params[:trip][:rating]})
+      if result
+        redirect_to passengers_path
+        # redirect_to "/passengers/#{params[:passenger_id]}"
       else
-        redirect_to trip_path(@trip)
-      end
-    else
-      render :edit
-    end
-  
+        render :edit
+      end    
   end
 
   def destroy
-    id = params[:id]
-    @trip = Trip.find(id)
-    if @trip
-      @trip.destroy
-    end
-    redirect_to trips_path
+    trip = Trip.find(params[:id])
+
+    trip.destroy
+
+    redirect_to root_path
+
   end
-end
 
 private
 def trip_params
   return params.require(:trip).permit(:date, :cost, :passenger_id, :driver_id, :rating)
+
 end
