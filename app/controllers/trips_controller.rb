@@ -28,8 +28,8 @@ class TripsController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @trip = Trip.find(id)
+
+    @trip = Trip.find_by(id: params[:id])
   end
 
   def edit
@@ -44,7 +44,7 @@ class TripsController < ApplicationController
 
     if @trip.save
       if @trip.rating > 0
-        redirect_to trip_path(@trip.passenger)
+        redirect_to passenger_path(@trip.passenger)
       else
         redirect_to trip_path(@trip)
       end

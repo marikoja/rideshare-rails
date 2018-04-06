@@ -1,7 +1,7 @@
 <h2>Name:<%= @passenger.name %></h2>
 
 <h2>Phone_num:<%= @passenger.phone_num %></h2>
-<h2>Total_cost:<%= @passenger.total_cost %></h2>
+<h2>Total_cost:<%= '%.02f' % (@passenger.total_cost / 100) %></h2>
 <h2>Passengers Trips</h2>
 <table>
   <tr>
@@ -31,9 +31,9 @@
         <%= trip.rating %>
       <% end %>
     </td>
-    <td><%=trip.cost%></td>
-    <td><%= link_to "Edit" , edit_passenger_path(@passenger.id)%></td>
-    <td><%= link_to "Delete", trip_path(trip.id),method: :delete %></td>
+    <td><%='%.02f' % (trip.cost / 100)%></td>
+    <td><%= link_to "Edit Trip" , edit_trip_path%></td>
+    <td><%= link_to "Delete Trip", trip_path(trip.id),method: :delete %></td>
     </tr>
     <% end %>
 

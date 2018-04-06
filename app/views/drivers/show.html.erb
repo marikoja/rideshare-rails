@@ -31,7 +31,7 @@
         <td><%= trip.passenger_id %></td>
         <td><%= trip.date %></td>
         <td><%= trip.rating %></td>
-        <td><%="$#{(trip.cost/100)}"%></td>
+        <td><%="$#{'%.02f' % (trip.cost / 100)}"%></td>
         <td><%= link_to "Edit Trip", edit_trip_path %></td>
         <td><%= link_to "Delete Trip", trip_path(trip.id), method: :delete %></td>
       </tr>
