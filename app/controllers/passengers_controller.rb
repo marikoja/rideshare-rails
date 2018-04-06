@@ -1,4 +1,4 @@
-class PassengersController < ApplicationController
+mclass PassengersController < ApplicationController
   def index
     @passengers = Passenger.all.order(:name)
   end
