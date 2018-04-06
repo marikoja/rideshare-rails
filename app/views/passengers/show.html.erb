@@ -1,45 +1,29 @@
-<h2>Name:<%= @passenger.name %></h2>
+<h2>
+<%= "Passenger #{@passenger.id}: #{@passenger.name}" %>
+<%= "Phone number: #{@passenger.phone_num}" %>
+</h2>
 
-<h2>Phone_num:<%= @passenger.phone_num %></h2>
-<h2>Total_cost:<%= @passenger.total_cost %></h2>
-<h2>Passengers Trips</h2>
+<% @passenger.total_cost %>
+
+<%= button_to "Edit", edit_passenger_path(@passenger.id), method: :get %>
+<%= button_to "Delete", passenger_path(@passenger), method: :delete, data: {confirm: "Are you sure you want to delete this passenger?"} %>
+<%= button_to "Add New Trip", passenger_new_trip_path(@passenger.id), method: :post %>
+
+<%= "#{@passenger.name} has taken #{@passenger.trips.length} trip(s)" %>
+
 <table>
   <tr>
-    <th>ID</th>
-      <th>Driver</th>
-      <th>Passenger</th>
-      <th>Date</th>
-      <th>Rating</th>
-      <th>Cost</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-
-    <% @passenger.trips.all.each do |trip| %>
-    <tr>
-    <td><%=trip.id%></td>
-    <td><%=trip.driver_id%></td>
-    <td><%= trip.passenger_id %></td>
-    <td><%= trip.date %></td>
-    <td><%= trip.rating %></td>
-    <td><%=trip.cost%></td>
-    <td><%= link_to "Edit" , edit_passenger_path(@passenger.id)%></td>
-    <td><%= link_to "Delete", passenger_path(@passenger.id),method: :delete %></td>
-    </tr>
-    <% end %>
-
-
+    <th>Trip Number</th>
+    <th>Driver ID</th>
+    <th>Cost of Trip</th>
+    <th>Trip Rating</th>
+  </tr>
+<% @passenger.trips.each do |trip| %>
+<tr>
+  <td><%= link_to "Trip #{trip.id}", trip_path(trip.id) %></td>
+  <td><%= "Driver Id: #{trip.driver_id}" %></td>
+  <td><%= "Cost of trip: $#{trip.cost_in_dollars}" %></td>
+  <td><%= "Trip rating: #{trip.rating}" %></td>
+  </tr>
+  <% end %>
 </table>
-
-
-
-<ul>
-   <li>
-     <%= link_to "Request ride", passenger_trips_path(params[:id]),  method: :post %></li>
-     <li><%= link_to "Edit", edit_passenger_path %></li>
-
-
-   <li>
-     <%= link_to "Delete", passenger_path(@passenger.id), method: :delete %>
-   </li>
- </ul>
