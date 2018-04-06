@@ -10,6 +10,7 @@
   <%= "Total Earnings: $#{@driver.driver_earnings}"%>
 </p>
 
+<p><%= link_to "Edit Driver", edit_driver_path %></p>
 <p><%= link_to "Delete Driver", driver_path(@driver.id), method: :delete %> </p>
 
 <h2>Driver Trips</h2>
