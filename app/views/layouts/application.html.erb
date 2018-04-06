@@ -18,10 +18,10 @@
       <%=link_to "Add New Passenger", new_passenger_path, method: :get%>
       <%=link_to "All Drivers", drivers_path, method: :get%>
       <%=link_to "Add New Driver", new_driver_path, method: :get%>
+      <%= link_to "All Trips", trips_path %>
     </div>
   </header>
 
-  <main>
     <%= yield %>
   </main>
 

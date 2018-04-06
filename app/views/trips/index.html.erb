@@ -1,8 +1,32 @@
 <h2>All TRIPS!!!</h2>
 
-<% @trips.each do |trip| %>
-  <p>
-    <%= trip.id %>
-  </p>
+<table>
+  <tr>
+    <th>Trip ID</th>
+    <th>Trip Date</th>
+    <th>Passenger ID</th>
+    <th>Driver ID</th>
+    <th>Trip Rating</th>
+    <th>Trip Cost</th>
+  </tr>
+  <% @trips.each do |trip| %>
+  <tr>
+    <td><%= trip.id %></td>
+    <td><%= trip.date %></td>
+    <td>
+      <% if trip.passenger_id != nil %>
+        <%= link_to trip.passenger.name, passenger_path(trip.passenger)%>
+      <% end %>
+    </td>
 
-<% end %>
+    <td>
+      <% if trip.driver_id != nil %>
+        <%= link_to trip.driver.name, driver_path(trip.driver) %>
+      <% end %>
+    </td>
+    <td><%= trip.rating %></td>
+    <td>$<%='%.02f' % (trip.cost / 100)%></td>
+  </tr>
+    <% end %>
+</table>
+

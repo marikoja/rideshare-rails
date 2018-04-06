@@ -1,6 +1,10 @@
 class Driver < ApplicationRecord
-  # has_many :trips
+
   has_many :trips, -> { order(date: :desc) }, dependent: :destroy
+
+    validates :name, uniqueness: {message: "Driver already exists"}
+    validates :vin,  uniqueness: {message: "Vin already exists"}
+
 
   validates :name, presence: { message: "You need to provide a name" }
   validates :vin, presence: { message: "You need to provide a VIN number" }
@@ -30,4 +34,6 @@ class Driver < ApplicationRecord
       return (total_rating / counter)
     end
   end
+
+
 end

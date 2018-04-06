@@ -12,11 +12,12 @@ class TripsController < ApplicationController
   end
 
   def new
+
     @trip = Trip.new(passenger_id: params[:passenger][:passenger_id])
   end
 
   def create
-    puts params
+    
     @trip = Trip.new(
       driver_id: Driver.order("RANDOM()").first.id,
       passenger_id: params[:passenger_id],
@@ -31,7 +32,9 @@ class TripsController < ApplicationController
       render :new
     end
   end
+   
 
+ 
   def edit
     @trip = Trip.find(params[:id])
   end
@@ -39,13 +42,12 @@ class TripsController < ApplicationController
   def update
     @trip = Trip.find(params[:id])
     result = @trip.update({rating: params[:trip][:rating]})
-
       if result
         redirect_to passengers_path
         # redirect_to "/passengers/#{params[:passenger_id]}"
       else
         render :edit
-      end
+      end    
   end
 
   def destroy
@@ -55,6 +57,10 @@ class TripsController < ApplicationController
 
     redirect_to root_path
 
-
   end
+
+private
+def trip_params
+  return params.require(:trip).permit(:date, :cost, :passenger_id, :driver_id, :rating)
+
 end

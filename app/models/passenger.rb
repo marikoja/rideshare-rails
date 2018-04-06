@@ -1,6 +1,8 @@
 class Passenger < ApplicationRecord
-  # has_many :trips
+
   has_many :trips, -> { order(date: :desc) } ,dependent: :destroy
+
+  validates :name,  uniqueness: {message: "passenger name is already in our system!"}
 
   validates :name, presence: {message: 'Please provide a valid name.'}
   validates :phone_num, presence: {message: 'Please provide a valud phone number.'}
