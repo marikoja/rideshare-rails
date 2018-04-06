@@ -1,36 +1,19 @@
+<h2>Your Trip Details</h2>
 
-
-<h2>Here are the Trip details </h2>
-<!-- <h2>Driver:<%= Driver.random_driver.name%></h2>
-<h2>Cost:<%= Driver.cost %></p>
-    <h2> Date:<%= Date.today %> </h2>
-
-    <h2> Rating: <%= @trip.rating %></h2>
-    <h1> Individual trip detail </h1> -->
-    <table>
-      <tr>
-        <th>Trip ID:</th>
-        <th>Driver:</th>
-        <th>Passenger</th>
-        <th>Date:</th>
-        <th>Rating:</th>
-        <th>Cost:</th>
-
-
-      </tr>
-    <tr>
-    <td><%= @trip.id %></td>
-     <td><%= Driver.random_driver.name %></td>
-    <td> <%= @trip.passenger.name %></td>
-    <td><%= Date.today%></td>
-    <td><%= @trip.rating %></td>
-    <td><%= Driver.cost %></td>
+<table>
+  <tr>
+    <th>Passenger Name</th>
+    <th>Driver Name</th>
+    <th>Cost of Trip</th>
+    <th>Trip Rating</th>
   </tr>
-  </table>
+  <tr>
+    <td><%= @trip.passenger.name %></td>
+    <td><%= @trip.driver.name %></td>
+    <td><%= "$#{@trip.cost/100.round(2)}" %></td>
+    <td><%= "#{@trip.rating}" %></td>
+  </tr>
+</table>
 
-
-  <%= link_to "edit", edit_trip_path(params[:passenger_id]) %></td>
-  <%= link_to "delete",
-    trip_path(params[:passenger_id]),
-    method: :delete,
-    data: { confirm: 'Are you sure?' } %></td>
+    <%= link_to "Edit rating", edit_trip_path %>
+    <%= button_to "Delete", trip_path(@trip.id), method: :delete %>
