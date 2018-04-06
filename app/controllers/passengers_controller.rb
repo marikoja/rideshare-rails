@@ -12,7 +12,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.new(passenger_params)
 
     if @passenger.save
-      redirect_to '/passengers'
+      redirect_to passenger_path
     else
       render :new
     end

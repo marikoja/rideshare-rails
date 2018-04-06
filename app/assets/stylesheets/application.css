@@ -59,7 +59,9 @@ h2 {
 }
 
 main {
-  /*background-color: white;*/
+
+
+  background-color: white;
   opacity: .8;
   clear:both;
   padding: 50px;
@@ -93,7 +95,7 @@ th {
     height: 50px;
   }
 button{
-  background-color: green;
+  color: green;
 }
 footer div{
   position: fixed;

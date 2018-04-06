@@ -25,7 +25,8 @@ class TripsController < ApplicationController
       date: Date.today
     )
     if @trip.save
-      redirect_to "/passengers/#{params[:passenger_id]}"
+      redirect_to passengers_path
+      # redirect_to "/passengers/#{params[:passenger_id]}"
     else
       render :new
     end
@@ -40,7 +41,8 @@ class TripsController < ApplicationController
     result = @trip.update({rating: params[:trip][:rating]})
 
       if result
-        redirect_to "/passengers/#{params[:passenger_id]}"
+        redirect_to passengers_path
+        # redirect_to "/passengers/#{params[:passenger_id]}"
       else
         render :edit
       end

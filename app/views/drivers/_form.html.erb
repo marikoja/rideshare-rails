@@ -1,12 +1,16 @@
 <% button_text = "The button" %>
-<% form_class ||= "" %>
+<% form_class = "" %>
 
 <%= form_for @driver do |f| %>
   <%= f.label :name %>
+  <br>
   <%= f.text_field :name %>
+  <br>
 
   <%= f.label :vin %>
+  <br>
   <%= f.text_field :vin %>
+  <br>
 
   <%= f.submit %>
 
