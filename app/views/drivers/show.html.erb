@@ -7,17 +7,16 @@
 </div>
 
 <div>
-  <%= @driver.total_earnings %>
+  <%="Driver's Total Earnings: #{ @driver.total_earnings}" %>
 </div>
-
 
 <div>
-  <%= @driver.avg_rating %>
+  <%= "Driver's Average Ratings: #{@driver.avg_rating}" %>
 </div>
-
+<br>
 <div>
   <%= button_to "Edit Driver", edit_driver_path(@driver.id), method: :get %>
-  <%= button_to "Delete Driver", driver_path(@driver.id), method: :delete, data: {confirm: "Are you sure you want to delete this passenger?"} %>
+  <%= button_to "Delete Driver", driver_path(@driver.id), method: :delete, data: {confirm: "Are you sure you want to delete this Driver?"} %>
 </div>
 
 <h2>Driver Trips</h2>

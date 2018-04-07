@@ -13,6 +13,6 @@ class Passenger < ApplicationRecord
     trips.each do |trip|
       total_cost += trip.cost
     end
-    return "$ #{total_cost/100.round(2)}"
+    return total_cost/100.round(2)
   end
 end

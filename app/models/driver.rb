@@ -15,7 +15,7 @@ class Driver < ApplicationRecord
     trips.each do |trip|
       total += trip.cost
     end
-    total_earning = total * (1 - 0.15)
+    total_earning = total * (1 - 0.20)
     return "$ #{(total_earning/100).round(2)}"
   end
 

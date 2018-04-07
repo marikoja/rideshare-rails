@@ -10,10 +10,8 @@ class PassengersController < ApplicationController
 
   def create
     @passenger = Passenger.new(passenger_params)
-
     if @passenger.save
       redirect_to passenger_path(@passenger)
-
     else
       render :new
     end
